@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zuimeihui.demo.service.dao.db2.DemoDepartmentMapper">
+  <resultMap id="BaseResultMap" type="com.zuimeihui.demo.common.pojo.DemoDepartment">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="time_create" jdbcType="TIMESTAMP" property="timeCreate" />
+    <result column="time_update" jdbcType="TIMESTAMP" property="timeUpdate" />
+    <result column="admin_id" jdbcType="VARCHAR" property="adminId" />
+    <result column="admin_name" jdbcType="VARCHAR" property="adminName" />
+    <result column="up_id" jdbcType="BIGINT" property="upId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="freeze" jdbcType="TINYINT" property="freeze" />
+    <result column="remark" jdbcType="LONGVARCHAR" property="remark" />
+  </resultMap>
+  
+  <!-- 自定义，以下 -->
+  <resultMap id="ResultMapWithDTO" extends="BaseResultMap" type="com.zuimeihui.demo.common.dto.DemoDepartmentDTO" />
+  <sql id="Base_Where">
+  	<if test="id != null">
+		and id=#{id, jdbcType=BIGINT}
+	</if>
+	<if test="timeCreateBegin != null and timeCreateEnd != null">
+		and time_create &gt;= #{timeCreateBegin, jdbcType=TIMESTAMP} and time_create &lt;= #{timeCreateEnd, jdbcType=TIMESTAMP}
+	</if>
+	<if test="timeUpdateBegin != null and timeUpdateEnd != null">
+		and time_update &gt;= #{timeUpdateBegin, jdbcType=TIMESTAMP} and time_create &lt;= #{timeUpdateEnd, jdbcType=TIMESTAMP}
+	</if>
+	<if test="upId != null">
+		and up_id=#{upId, jdbcType=BIGINT}
+	</if>
+	<if test="name != null and name != ''">
+		<bind name="likeName" value="'%' + _parameter.name + '%'" />
+		and name like #{likeName, jdbcType=VARCHAR}
+	</if>
+	<if test="freeze != null">
+		and freeze=#{freeze, jdbcType=TINYINT}
+	</if>
+  </sql>
+  <!-- 自定义，以上 -->
+
+  <sql id="Base_Column_List">
+    id, time_create, time_update, admin_id, admin_name, up_id, name, freeze, 
+    remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithDTO">
+    select 
+    <include refid="Base_Column_List" />
+    from demo_department
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <!-- 自定义，以下 -->
+  <select id="selectBy" parameterType="com.zuimeihui.demo.common.dto.DemoDepartmentQueryDTO" resultMap="ResultMapWithDTO">
+	  select 
+	  <include refid="Base_Column_List" />
+	  from demo_department where 1=1 
+	  <include refid="Base_Where" />
+	  order by 
+	  <choose>
+		  <when test="fields == 'id'">id</when>
+		  <otherwise>id</otherwise>
+	  </choose>
+	  <choose>
+		  <when test="order == 'asc'">asc</when>
+		  <when test="order == 'desc'">desc</when>
+		  <otherwise>desc</otherwise>
+	  </choose>
+	  <if test="isPage">limit #{start}, #{end}</if>
+  </select>
+  <select id="countBy" parameterType="com.zuimeihui.demo.common.dto.DemoDepartmentQueryDTO" resultType="java.lang.Integer">
+	  select count(1) from demo_department where 1=1 
+	  <include refid="Base_Where" />
+  </select>
+  <select id="uniqueBy" parameterType="com.zuimeihui.demo.common.dto.DemoDepartmentQueryDTO" resultMap="ResultMapWithDTO">
+	  select 
+	  <include refid="Base_Column_List" />
+	  from demo_department where 1=1 
+	  <include refid="Base_Where" />
+	  limit 1
+  </select>
+  <!-- 自定义，以上 -->
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from demo_department
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.zuimeihui.demo.common.pojo.DemoDepartment" useGeneratedKeys="true" keyProperty="id">
+    insert into demo_department (id, time_create, time_update, 
+      admin_id, admin_name, up_id, 
+      name, freeze, remark
+      )
+    values (#{id,jdbcType=BIGINT}, #{timeCreate,jdbcType=TIMESTAMP}, #{timeUpdate,jdbcType=TIMESTAMP}, 
+      #{adminId,jdbcType=VARCHAR}, #{adminName,jdbcType=VARCHAR}, #{upId,jdbcType=BIGINT}, 
+      #{name,jdbcType=VARCHAR}, #{freeze,jdbcType=TINYINT}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zuimeihui.demo.common.pojo.DemoDepartment" useGeneratedKeys="true" keyProperty="id">
+    insert into demo_department
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="timeCreate != null">
+        time_create,
+      </if>
+      <if test="timeUpdate != null">
+        time_update,
+      </if>
+      <if test="adminId != null">
+        admin_id,
+      </if>
+      <if test="adminName != null">
+        admin_name,
+      </if>
+      <if test="upId != null">
+        up_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="freeze != null">
+        freeze,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="timeCreate != null">
+        #{timeCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeUpdate != null">
+        #{timeUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminId != null">
+        #{adminId,jdbcType=VARCHAR},
+      </if>
+      <if test="adminName != null">
+        #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="upId != null">
+        #{upId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="freeze != null">
+        #{freeze,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zuimeihui.demo.common.pojo.DemoDepartment">
+    update demo_department
+    <set>
+      <if test="timeCreate != null">
+        time_create = #{timeCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeUpdate != null">
+        time_update = #{timeUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminId != null">
+        admin_id = #{adminId,jdbcType=VARCHAR},
+      </if>
+      <if test="adminName != null">
+        admin_name = #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="upId != null">
+        up_id = #{upId,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="freeze != null">
+        freeze = #{freeze,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zuimeihui.demo.common.pojo.DemoDepartment">
+    update demo_department
+    set time_create = #{timeCreate,jdbcType=TIMESTAMP},
+      time_update = #{timeUpdate,jdbcType=TIMESTAMP},
+      admin_id = #{adminId,jdbcType=VARCHAR},
+      admin_name = #{adminName,jdbcType=VARCHAR},
+      up_id = #{upId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      freeze = #{freeze,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

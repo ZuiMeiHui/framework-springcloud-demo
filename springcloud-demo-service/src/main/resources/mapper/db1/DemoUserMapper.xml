@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zuimeihui.demo.service.dao.db1.DemoUserMapper">
+  <resultMap id="BaseResultMap" type="com.zuimeihui.demo.common.pojo.DemoUser">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="time_create" jdbcType="TIMESTAMP" property="timeCreate" />
+    <result column="time_update" jdbcType="TIMESTAMP" property="timeUpdate" />
+    <result column="admin_id" jdbcType="VARCHAR" property="adminId" />
+    <result column="admin_name" jdbcType="VARCHAR" property="adminName" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="age" jdbcType="TINYINT" property="age" />
+    <result column="sex" jdbcType="TINYINT" property="sex" />
+    <result column="mobile_phone" jdbcType="VARCHAR" property="mobilePhone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="freeze" jdbcType="TINYINT" property="freeze" />
+    <result column="remark" jdbcType="LONGVARCHAR" property="remark" />
+  </resultMap>
+  
+  <!-- 自定义，以下 -->
+  <resultMap id="ResultMapWithDTO" extends="BaseResultMap" type="com.zuimeihui.demo.common.dto.DemoUserDTO" />
+  <sql id="Base_Where">
+  	<if test="id != null">
+		and id=#{id, jdbcType=BIGINT}
+	</if>
+	<if test="timeCreateBegin != null and timeCreateEnd != null">
+		and time_create &gt;= #{timeCreateBegin, jdbcType=TIMESTAMP} and time_create &lt;= #{timeCreateEnd, jdbcType=TIMESTAMP}
+	</if>
+	<if test="timeUpdateBegin != null and timeUpdateEnd != null">
+		and time_update &gt;= #{timeUpdateBegin, jdbcType=TIMESTAMP} and time_create &lt;= #{timeUpdateEnd, jdbcType=TIMESTAMP}
+	</if>
+	<if test="name != null and name != ''">
+		<bind name="likeName" value="'%' + _parameter.name + '%'" />
+		and name like #{likeName, jdbcType=VARCHAR}
+	</if>
+	<if test="freeze != null">
+		and freeze=#{freeze, jdbcType=TINYINT}
+	</if>
+  </sql>
+  <!-- 自定义，以上 -->
+  
+  <sql id="Base_Column_List">
+    id, time_create, time_update, admin_id, admin_name, name, age, sex, mobile_phone, 
+    email, freeze, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithDTO">
+    select 
+    <include refid="Base_Column_List" />
+    from demo_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <!-- 自定义，以下 -->
+  <select id="selectBy" parameterType="com.zuimeihui.demo.common.dto.DemoUserQueryDTO" resultMap="ResultMapWithDTO">
+	  select 
+	  <include refid="Base_Column_List" />
+	  from demo_user where 1=1 
+	  <include refid="Base_Where" />
+	  order by 
+	  <choose>
+		  <when test="fields == 'id'">id</when>
+		  <otherwise>id</otherwise>
+	  </choose>
+	  <choose>
+		  <when test="order == 'asc'">asc</when>
+		  <when test="order == 'desc'">desc</when>
+		  <otherwise>desc</otherwise>
+	  </choose>
+	  <if test="isPage">limit #{start}, #{end}</if>
+  </select>
+  <select id="countBy" parameterType="com.zuimeihui.demo.common.dto.DemoUserQueryDTO" resultType="java.lang.Integer">
+	  select count(1) from demo_user where 1=1 
+	  <include refid="Base_Where" />
+  </select>
+  <select id="uniqueBy" parameterType="com.zuimeihui.demo.common.dto.DemoUserQueryDTO" resultMap="ResultMapWithDTO">
+	  select 
+	  <include refid="Base_Column_List" />
+	  from demo_user where 1=1 
+	  <include refid="Base_Where" />
+	  limit 1
+  </select>
+  <!-- 自定义，以上 -->
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from demo_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <!-- 此处新增返回值 -->
+  <insert id="insert" parameterType="com.zuimeihui.demo.common.pojo.DemoUser" useGeneratedKeys="true" keyProperty="id">
+    insert into demo_user (id, time_create, time_update, 
+      admin_id, admin_name, name, 
+      age, sex, mobile_phone, 
+      email, freeze, remark
+      )
+    values (#{id,jdbcType=BIGINT}, #{timeCreate,jdbcType=TIMESTAMP}, #{timeUpdate,jdbcType=TIMESTAMP}, 
+      #{adminId,jdbcType=VARCHAR}, #{adminName,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{age,jdbcType=TINYINT}, #{sex,jdbcType=TINYINT}, #{mobilePhone,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{freeze,jdbcType=TINYINT}, #{remark,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  
+  <!-- 此处新增返回值 -->
+  <insert id="insertSelective" parameterType="com.zuimeihui.demo.common.pojo.DemoUser" useGeneratedKeys="true" keyProperty="id">
+    insert into demo_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="timeCreate != null">
+        time_create,
+      </if>
+      <if test="timeUpdate != null">
+        time_update,
+      </if>
+      <if test="adminId != null">
+        admin_id,
+      </if>
+      <if test="adminName != null">
+        admin_name,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="mobilePhone != null">
+        mobile_phone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="freeze != null">
+        freeze,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="timeCreate != null">
+        #{timeCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeUpdate != null">
+        #{timeUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminId != null">
+        #{adminId,jdbcType=VARCHAR},
+      </if>
+      <if test="adminName != null">
+        #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=TINYINT},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="mobilePhone != null">
+        #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="freeze != null">
+        #{freeze,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zuimeihui.demo.common.pojo.DemoUser">
+    update demo_user
+    <set>
+      <if test="timeCreate != null">
+        time_create = #{timeCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeUpdate != null">
+        time_update = #{timeUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="adminId != null">
+        admin_id = #{adminId,jdbcType=VARCHAR},
+      </if>
+      <if test="adminName != null">
+        admin_name = #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=TINYINT},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=TINYINT},
+      </if>
+      <if test="mobilePhone != null">
+        mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="freeze != null">
+        freeze = #{freeze,jdbcType=TINYINT},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zuimeihui.demo.common.pojo.DemoUser">
+    update demo_user
+    set time_create = #{timeCreate,jdbcType=TIMESTAMP},
+      time_update = #{timeUpdate,jdbcType=TIMESTAMP},
+      admin_id = #{adminId,jdbcType=VARCHAR},
+      admin_name = #{adminName,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      age = #{age,jdbcType=TINYINT},
+      sex = #{sex,jdbcType=TINYINT},
+      mobile_phone = #{mobilePhone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      freeze = #{freeze,jdbcType=TINYINT},
+      remark = #{remark,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
