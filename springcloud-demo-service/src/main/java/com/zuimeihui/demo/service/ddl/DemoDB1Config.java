@@ -17,14 +17,15 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 /**
  * db_demo_1库 - 数据库配置
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-18 11:17:35
+ * @ClassName: DemoDB1Config
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 @Configuration
 @MapperScan(basePackages = { "com.zuimeihui.demo.service.dao.db1", "com.zuimeihui.demo.service.dao.db1.*" }, sqlSessionFactoryRef = "db1SqlSessionFactory")
 public class DemoDB1Config {
 
-	@Primary 
+	@Primary
 	@Bean("db1DataSource")
 	@ConfigurationProperties(prefix = "spring.datasource.db1")
 	public DataSource getDb1DataSource() {
@@ -45,4 +46,5 @@ public class DemoDB1Config {
 	public SqlSessionTemplate db1SqlSessionTemplate(@Qualifier("db1SqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
 		return new SqlSessionTemplate(sqlSessionFactory);
 	}
+	
 }

@@ -5,10 +5,11 @@ import org.springframework.stereotype.Service;
 import com.zuimeihui.demo.common.dto.DemoUserDTO;
 
 /**
- * 服务端API通用鉴权类
+ * 鉴权用户是否登陆
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-18 11:41:22
+ * @ClassName: OAuthService
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 @Service
 public class OAuthService {
@@ -16,14 +17,19 @@ public class OAuthService {
 	/**
 	 * 对Token鉴权
 	 * 
-	 * @param token
-	 * @return
+	 * @Title: checkToken
+	 * @Description: TODO
+	 * @param @param  token
+	 * @param @return 参数
+	 * @return DemoUserDTO 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public DemoUserDTO checkToken(String token) {
 		// 例子，具体鉴权方法需根据用户接口自行实现
 		DemoUserDTO demoUserDTO = new DemoUserDTO();
 		demoUserDTO.setId(1L);
-		demoUserDTO.setName("YangZi");
+		demoUserDTO.setName("LiYang");
 		return demoUserDTO;
 	}
 }

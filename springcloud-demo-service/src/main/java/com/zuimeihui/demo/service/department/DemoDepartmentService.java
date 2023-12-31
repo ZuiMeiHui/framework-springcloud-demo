@@ -10,16 +10,27 @@ import com.zuimeihui.demo.service.base.BaseService;
 import com.zuimeihui.demo.service.dao.db2.DemoDepartmentMapper;
 
 /**
- * 部门表，服务层
+ * 部门服务层
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-12 20:29:00
+ * @ClassName: DemoDepartmentService
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 @Service
 public class DemoDepartmentService extends BaseService<DemoDepartmentMapper, DemoDepartmentDTO, DemoDepartmentQueryDTO> {
 
 	/**
 	 * 保存和更新
+	 * 
+	 * @Title: save
+	 * @Description: TODO
+	 * @param @param  dto
+	 * @param @param  userId
+	 * @param @param  userName
+	 * @param @return 参数
+	 * @return Long 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public Long save(DemoDepartmentDTO dto, String userId, String userName) {
 		dto.setAdminId(userId);

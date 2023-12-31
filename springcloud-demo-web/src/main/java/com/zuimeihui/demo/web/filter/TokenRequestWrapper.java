@@ -11,9 +11,9 @@ import com.zuimeihui.demo.common.Constants;
 
 /**
  * 将用户信息放入Request中
- * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-18 11:51:27
+ * @ClassName: TokenRequestWrapper
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 public class TokenRequestWrapper extends HttpServletRequestWrapper {
 

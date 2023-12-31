@@ -9,8 +9,9 @@ import com.zuimeihui.demo.service.base.BaseMapper;
 /**
  * 用户表Mapper
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-12 14:52:39
+ * @ClassName: DemoUserMapper
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 @Mapper
 public interface DemoUserMapper extends BaseMapper<DemoUserDTO, DemoUserQueryDTO> {

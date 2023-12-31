@@ -5,10 +5,11 @@ import java.io.Serializable;
 /**
  * 分页
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-12 10:15:06
+ * @ClassName: PageCustom
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
-public class PageCustom implements Serializable{
+public class PageCustom implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -69,4 +70,5 @@ public class PageCustom implements Serializable{
 	public Integer getEnd() {
 		return pageSize;
 	}
+
 }

@@ -27,27 +27,28 @@ import com.zuimeihui.demo.web.utils.OAuthService;
 /**
  * 鉴权过滤器
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-18 11:52:54
+ * @ClassName: OAuthFilter
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 @WebFilter(filterName = "OAuthFilter", urlPatterns = "/*")
 @Component
 public class OAuthFilter implements Filter {
-	
+
 	@Autowired
 	private OAuthService oAuthService;
-	
+
 	/**
 	 * 免鉴权接口
 	 */
-	private static String[] ignoreURI = {
+	private static String[] ignoreURI = { 
 			"/main.htm" // 健康检查
 	};
-	
+
 	public void init(FilterConfig filterConfig) throws ServletException {
-		
+
 	}
-	
+
 	/**
 	 * 开始API接口鉴权，通过鉴权的用户信息放入Request中，方便接口直接使用
 	 */
@@ -61,7 +62,7 @@ public class OAuthFilter implements Filter {
 		Boolean isIgnoreUrl = false;
 		if (ignoreURI != null && ignoreURI.length > 0) {
 			for (String ignore : ignoreURI) {
-				if (Pattern.matches(ignore,  uri)) {
+				if (Pattern.matches(ignore, uri)) {
 					isIgnoreUrl = true;
 					userId = "0";
 					userName = "unknown";
@@ -73,21 +74,27 @@ public class OAuthFilter implements Filter {
 		if (!isIgnoreUrl) {
 			if (StringUtils.isBlank(token) || StringUtils.isBlank(userId) || StringUtils.isBlank(userName)) {
 				noAuthMsg(req, response);
-				return ;
+				return;
 			}
 		}
 		chain.doFilter(new TokenRequestWrapper(req, token, userId, userName), response);
 	}
-	
+
 	@Override
 	public void destroy() {
-		
+
 	}
-	
+
 	/**
 	 * 鉴权验证失败，返回403
-	 * @param request
-	 * @param response
+	 * 
+	 * @Title: noAuthMsg
+	 * @Description: TODO
+	 * @param @param request
+	 * @param @param response 参数
+	 * @return void 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	private void noAuthMsg(HttpServletRequest request, ServletResponse response) {
 		HttpServletResponse resp = (HttpServletResponse) response;
@@ -115,11 +122,10 @@ public class OAuthFilter implements Filter {
 				try {
 					osw.close();
 				} catch (IOException e) {
-					
+
 				}
 			}
 		}
 	}
-	
+
 }
- 

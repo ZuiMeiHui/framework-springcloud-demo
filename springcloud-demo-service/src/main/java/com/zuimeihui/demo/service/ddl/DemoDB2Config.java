@@ -16,8 +16,9 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 /**
  * db_demo_2库 - 数据库配置
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-18 11:17:35
+ * @ClassName: DemoDB2Config
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 @Configuration
 @MapperScan(basePackages = { "com.zuimeihui.demo.service.dao.db2", "com.zuimeihui.demo.service.dao.db2.*" }, sqlSessionFactoryRef = "db2SqlSessionFactory")
@@ -41,4 +42,5 @@ public class DemoDB2Config {
 	public SqlSessionTemplate db2SqlSessionTemplate(@Qualifier("db2SqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
 		return new SqlSessionTemplate(sqlSessionFactory);
 	}
+	
 }

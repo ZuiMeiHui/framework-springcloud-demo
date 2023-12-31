@@ -8,15 +8,16 @@ import lombok.Setter;
 import lombok.ToString;
 
 /**
- * 分页bean
+ * 分页对象
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-12 10:37:04
+ * @ClassName: PageBean
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 @Setter
 @Getter
 @ToString
-public class PageBean<T> implements Serializable{
+public class PageBean<T> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

@@ -15,7 +15,7 @@
 	<name>springcloud-demo-web</name>
 
 	<dependencies>
-		<!-- 本工程common包 -->
+		<!-- 本工程common模块引入 -->
 		<dependency>
 			<groupId>com.zuimeihui.demo</groupId>
 			<artifactId>springcloud-demo-common</artifactId>

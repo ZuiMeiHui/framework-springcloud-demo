@@ -14,8 +14,9 @@ import lombok.experimental.Tolerate;
 /**
  * 用户表queryDTO
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-12 14:53:24
+ * @ClassName: DemoUserQueryDTO
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 @Setter
 @Getter
@@ -24,10 +25,10 @@ import lombok.experimental.Tolerate;
 public class DemoUserQueryDTO extends PageCustom implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Tolerate
 	public DemoUserQueryDTO() {
-		
+
 	}
 
 	private Long id;
@@ -39,9 +40,9 @@ public class DemoUserQueryDTO extends PageCustom implements Serializable {
 	private Date timeUpdateBegin;
 
 	private Date timeUpdateEnd;
-	
+
 	private String name;
-	
+
 	private Boolean freeze;
 
 }

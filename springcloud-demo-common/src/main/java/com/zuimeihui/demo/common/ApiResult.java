@@ -14,10 +14,11 @@ import com.zuimeihui.demo.common.enums.BaseResultEnum;
 import lombok.experimental.Accessors;
 
 /**
- * 通用接口，返回结果集
+ * 通用返回结果集
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-12 11:03:36
+ * @ClassName: ApiResult
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 @Accessors(chain = true)
 public class ApiResult<T> implements Serializable {
@@ -61,9 +62,14 @@ public class ApiResult<T> implements Serializable {
 	/**
 	 * 返回成功数据 （status 200）
 	 * 
-	 * @param <T>
-	 * @param data
-	 * @return
+	 * @Title: success
+	 * @Description: TODO
+	 * @param @param  <T>
+	 * @param @param  data
+	 * @param @return 参数
+	 * @return ApiResult<T> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public static <T> ApiResult<T> success(T data) {
 		return new ApiResult<T>(BaseResultEnum.SUCCESS.getCode(), BaseResultEnum.SUCCESS.getValue(), data);
@@ -72,19 +78,30 @@ public class ApiResult<T> implements Serializable {
 	/**
 	 * 返回成功数据 （status 200）
 	 * 
-	 * @param <T>
-	 * @param msg
-	 * @param data
-	 * @return
+	 * @Title: success
+	 * @Description: TODO
+	 * @param @param  <T>
+	 * @param @param  msg
+	 * @param @param  data
+	 * @param @return 参数
+	 * @return ApiResult<T> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public static <T> ApiResult<T> success(String msg, T data) {
-		return new ApiResult<T>(BaseResultEnum.SUCCESS.getCode(), msg != null ? msg.toString() : BaseResultEnum.SUCCESS.getValue(), data);
+		return new ApiResult<T>(BaseResultEnum.SUCCESS.getCode(),
+				msg != null ? msg.toString() : BaseResultEnum.SUCCESS.getValue(), data);
 	}
 
 	/**
-	 * 返回成功数据 （status 200）
+	 * 返回成功数据（status 200）
 	 * 
-	 * @return
+	 * @Title: success
+	 * @Description: TODO
+	 * @param @return 参数
+	 * @return ApiResult<?> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public static ApiResult<?> success() {
 		return success(null);
@@ -93,21 +110,32 @@ public class ApiResult<T> implements Serializable {
 	/**
 	 * 返回错误数据（status 500）
 	 * 
-	 * @param <T>
-	 * @param msg
-	 * @return
+	 * @Title: fail
+	 * @Description: TODO
+	 * @param @param  <T>
+	 * @param @param  msg
+	 * @param @return 参数
+	 * @return ApiResult<T> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public static <T> ApiResult<T> fail(String msg) {
-		return new ApiResult<T>(BaseResultEnum.FAIL.getCode(), msg != null ? msg.toString() : BaseResultEnum.FAIL.getValue(), null);
+		return new ApiResult<T>(BaseResultEnum.FAIL.getCode(),
+				msg != null ? msg.toString() : BaseResultEnum.FAIL.getValue(), null);
 	}
 
 	/**
 	 * 自定义返回错误数据
 	 * 
-	 * @param <T>
-	 * @param code
-	 * @param messsage
-	 * @return
+	 * @Title: fail
+	 * @Description: TODO
+	 * @param @param  <T>
+	 * @param @param  code
+	 * @param @param  message
+	 * @param @return 参数
+	 * @return ApiResult<T> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public static <T> ApiResult<T> fail(Integer code, String message) {
 		return new ApiResult<T>(code, message, null);
@@ -116,10 +144,15 @@ public class ApiResult<T> implements Serializable {
 	/**
 	 * 自定义返回错误数据
 	 * 
-	 * @param <T>
-	 * @param type
-	 * @param message
-	 * @return
+	 * @Title: fail
+	 * @Description: TODO
+	 * @param @param  <T>
+	 * @param @param  type
+	 * @param @param  message
+	 * @param @return 参数
+	 * @return ApiResult<T> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public static <T> ApiResult<T> fail(BaseResultEnum type, String message) {
 		String s = StringUtils.isBlank(message) ? message : type.getValue() + "," + message;
@@ -129,11 +162,16 @@ public class ApiResult<T> implements Serializable {
 	/**
 	 * 自定义返回错误数据
 	 * 
-	 * @param <T>
-	 * @param code
-	 * @param message
-	 * @param data
-	 * @return
+	 * @Title: fail
+	 * @Description: TODO
+	 * @param @param  <T>
+	 * @param @param  code
+	 * @param @param  message
+	 * @param @param  data
+	 * @param @return 参数
+	 * @return ApiResult<T> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public static <T> ApiResult<T> fail(Integer code, String message, T data) {
 		return new ApiResult<T>(code, message, data);
@@ -142,9 +180,14 @@ public class ApiResult<T> implements Serializable {
 	/**
 	 * 分页
 	 * 
-	 * @param pageMap
-	 * @param list
-	 * @return
+	 * @Title: successPage
+	 * @Description: TODO
+	 * @param @param  pageMap
+	 * @param @param  list
+	 * @param @return 参数
+	 * @return ApiResult<?> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public static ApiResult<?> successPage(Map<String, ?> pageMap, List<?> list) {
 		if (list == null) {

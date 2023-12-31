@@ -15,86 +15,122 @@ import com.zuimeihui.demo.common.dto.DemoDepartmentDTO;
 import com.zuimeihui.demo.common.dto.DemoDepartmentQueryDTO;
 
 /**
- * 部门表，接口层
+ * 部门接口层
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-12 20:29:00
+ * @ClassName: IDemoDepartmentService
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 @FeignClient(url = Constants.SPRINGCLOUD_PROVIDER_URL + "/demo-department", name = "IDemoDepartmentService")
 public interface IDemoDepartmentService {
-	
+
 	/**
-	 * 列表-带分页
+	 * 部门列表-带分页
 	 * 
-	 * @param queryDTO
-	 * @return
+	 * @Title: listPage
+	 * @Description: TODO
+	 * @param @param  userId
+	 * @param @param  userName
+	 * @param @param  queryDTO
+	 * @param @return 参数
+	 * @return ApiResult<?> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	@PostMapping({ "/list/page" })
-	public ApiResult<?> listPage(
-			@RequestParam(value= Constants.USER_ID_KEY, required = false) String userId,
-			@RequestParam(value= Constants.USER_NAME_KEY, required = false) String userName,
-			@RequestBody DemoDepartmentQueryDTO queryDTO) ;
+	public ApiResult<?> listPage(@RequestParam(value = Constants.USER_ID_KEY, required = false) String userId,
+			@RequestParam(value = Constants.USER_NAME_KEY, required = false) String userName,
+			@RequestBody DemoDepartmentQueryDTO queryDTO);
 
 	/**
-	 * 列表-不带分页
+	 * 部门列表-不带分页
 	 * 
-	 * @param queryDTO
-	 * @return
+	 * @Title: list
+	 * @Description: TODO
+	 * @param @param  userId
+	 * @param @param  userName
+	 * @param @param  queryDTO
+	 * @param @return 参数
+	 * @return ApiResult<?> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	@PostMapping({ "/list" })
-	public ApiResult<?> list(
-			@RequestParam(value= Constants.USER_ID_KEY, required = false) String userId,
-			@RequestParam(value= Constants.USER_NAME_KEY, required = false) String userName,
-			@RequestBody DemoDepartmentQueryDTO queryDTO) ;
+	public ApiResult<?> list(@RequestParam(value = Constants.USER_ID_KEY, required = false) String userId,
+			@RequestParam(value = Constants.USER_NAME_KEY, required = false) String userName,
+			@RequestBody DemoDepartmentQueryDTO queryDTO);
 
 	/**
-	 * 新增
+	 * 部门新增
 	 * 
-	 * @param dto
-	 * @return
+	 * @Title: add
+	 * @Description: TODO
+	 * @param @param  userId
+	 * @param @param  userName
+	 * @param @param  dto
+	 * @param @return 参数
+	 * @return ApiResult<?> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	@PostMapping({ "/add" })
-	public ApiResult<?> add(
-			@RequestParam(value= Constants.USER_ID_KEY, required = false) String userId,
-			@RequestParam(value= Constants.USER_NAME_KEY, required = false) String userName,
-			@RequestBody DemoDepartmentDTO dto) ;
+	public ApiResult<?> add(@RequestParam(value = Constants.USER_ID_KEY, required = false) String userId,
+			@RequestParam(value = Constants.USER_NAME_KEY, required = false) String userName,
+			@RequestBody DemoDepartmentDTO dto);
 
 	/**
-	 * 编辑
+	 * 部门编辑
 	 * 
-	 * @param dto
-	 * @param id
-	 * @return
+	 * @Title: edit
+	 * @Description: TODO
+	 * @param @param  userId
+	 * @param @param  userName
+	 * @param @param  dto
+	 * @param @param  id
+	 * @param @return 参数
+	 * @return ApiResult<?> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	@PutMapping({ "/{id}/edit" })
-	public ApiResult<?> edit(
-			@RequestParam(value= Constants.USER_ID_KEY, required = false) String userId,
-			@RequestParam(value= Constants.USER_NAME_KEY, required = false) String userName,
-			@RequestBody DemoDepartmentDTO dto, 
-			@PathVariable("id") Long id) ;
+	public ApiResult<?> edit(@RequestParam(value = Constants.USER_ID_KEY, required = false) String userId,
+			@RequestParam(value = Constants.USER_NAME_KEY, required = false) String userName,
+			@RequestBody DemoDepartmentDTO dto, @PathVariable("id") Long id);
 
 	/**
-	 * 详情
+	 * 部门详情
 	 * 
-	 * @param id
-	 * @return
+	 * @Title: detail
+	 * @Description: TODO
+	 * @param @param  userId
+	 * @param @param  userName
+	 * @param @param  id
+	 * @param @return 参数
+	 * @return ApiResult<?> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	@GetMapping({ "/{id}/detail" })
-	public ApiResult<?> detail(
-			@RequestParam(value= Constants.USER_ID_KEY, required = false) String userId,
-			@RequestParam(value= Constants.USER_NAME_KEY, required = false) String userName,
-			@PathVariable("id") Long id) ;
+	public ApiResult<?> detail(@RequestParam(value = Constants.USER_ID_KEY, required = false) String userId,
+			@RequestParam(value = Constants.USER_NAME_KEY, required = false) String userName,
+			@PathVariable("id") Long id);
 
 	/**
-	 * 删除
+	 * 部门删除
 	 * 
-	 * @param id
-	 * @return
+	 * @Title: delete
+	 * @Description: TODO
+	 * @param @param  userId
+	 * @param @param  userName
+	 * @param @param  id
+	 * @param @return 参数
+	 * @return ApiResult<?> 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	@DeleteMapping({ "/{id}/delete" })
-	public ApiResult<?> delete(
-			@RequestParam(value= Constants.USER_ID_KEY, required = false) String userId,
-			@RequestParam(value= Constants.USER_NAME_KEY, required = false) String userName,
-			@PathVariable("id") Long id) ;
-	
+	public ApiResult<?> delete(@RequestParam(value = Constants.USER_ID_KEY, required = false) String userId,
+			@RequestParam(value = Constants.USER_NAME_KEY, required = false) String userName,
+			@PathVariable("id") Long id);
+
 }

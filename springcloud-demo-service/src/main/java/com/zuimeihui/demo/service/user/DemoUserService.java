@@ -10,16 +10,27 @@ import com.zuimeihui.demo.service.base.BaseService;
 import com.zuimeihui.demo.service.dao.db1.DemoUserMapper;
 
 /**
- * 用户表，服务层
+ * 用户服务层
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-12 20:29:00
+ * @ClassName: DemoUserService
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 @Service
 public class DemoUserService extends BaseService<DemoUserMapper, DemoUserDTO, DemoUserQueryDTO> {
 
 	/**
 	 * 保存和更新
+	 * 
+	 * @Title: save
+	 * @Description: TODO
+	 * @param @param  dto
+	 * @param @param  userId
+	 * @param @param  userName
+	 * @param @return 参数
+	 * @return Long 返回类型
+	 * @throws
+	 * @author ZuiMeiHui.com 醉美会
 	 */
 	public Long save(DemoUserDTO dto, String userId, String userName) {
 		dto.setAdminId(userId);
@@ -34,5 +45,5 @@ public class DemoUserService extends BaseService<DemoUserMapper, DemoUserDTO, De
 		}
 		return dto.getId();
 	}
-	
+
 }

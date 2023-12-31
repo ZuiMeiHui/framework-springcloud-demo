@@ -9,8 +9,9 @@ import lombok.ToString;
 /**
  * 部门表DTO
  * 
- * @author 醉美会 ZuiMeiHui.com
- * @date 2023-11-12 14:53:06
+ * @ClassName: DemoDepartmentDTO
+ * @Description: TODO
+ * @author ZuiMeiHui.com 醉美会
  */
 @Setter
 @Getter
