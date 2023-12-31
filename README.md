@@ -1,11 +1,11 @@
 # framework-springcloud-demo
 
 ## 介绍
-本demo使用SpringCloud中组件搭建的服务提供者和服务消费者，并使用openfeign映射rest接口。内置两套数据源示例，使用mybatis中间件。  
+本demo使用SpringCloud中组件搭建的服务提供者(provider)和服务消费者(consumer)，并使用openfeign映射rest接口。内置两套数据源示例，使用mybatis中间件。  
 数据层与服务层已基类处理，数据操作接口已封装，满足日常业务需求。
 
 ## 模块
-本demo分为三个模块，common公共模块，service服务提供者模块，web服务消费者模块，并使用Maven初始化。
+本demo分为三个模块，common公共模块，service服务提供者模块，web服务消费者模块，需使用Maven初始化。
 
 ## 注册中心
 本demo使用zookeeper作为注册中心，若使用其他注册中心可自行修改。
